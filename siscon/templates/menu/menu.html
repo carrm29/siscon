@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}Menu{% endblock %}
+
+
+
+<body>
+{% block bodyini %}
+	{% if user.is_authenticated %}
+        <p style="color: #fff;"><img src="{% static 'img/ArrowUpB.png' %}"> Menu activado</p>
+	{% else %}
+	{% endif %}
+{% endblock %}
+
+
+<img id="img-inicio" src="{{STATIC_URL}}img/img-bg.jpg">
+
+
+
+{% block contenido %}
+
+
+
+{% endblock %}
+
+</body>

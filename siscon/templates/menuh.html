@@ -1,0 +1,44 @@
+{% load static %}
+
+{% block menuh %}
+<div class="container" >
+
+			<ul id="gn-menu" class="gn-menu-main">
+
+				<li class="gn-trigger">
+					<a class="gn-icon gn-icon-menu"><span>Menu</span></a>
+
+                     {% if user.is_authenticated %}
+                         <! --  Aquí va el menú de navegación  -->
+                         {% include 'navbar.html' %}
+                     {% endif %}
+
+				</li>
+
+            <li><a target="_blank" href="http://www.concresys.com/">
+                <img src="{% static 'img/concresysws.png' %}" WIDTH=218 HEIGHT=60 >
+                </a>
+            </li>
+
+
+
+                <li class="hidden-xs">
+
+                    <ul class="company-social">
+
+                        <li  > <script type="text/javascript"> var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"); var diasSemana = new Array("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"); var f=new Date(); document.write(diasSemana[f.getDay()] + ", " +  meses[f.getMonth()] + "  " + f.getDate() + "," + f.getFullYear()); </script>
+                               <!--   <script type="text/javascript"> function startTime(){ today=new Date(); h=today.getHours(); m=today.getMinutes(); s=today.getSeconds(); m=checkTime(m); s=checkTime(s); document.getElementById('reloj').innerHTML=h+":"+m+":"+s; t=setTimeout('startTime()',500);} function checkTime(i) {if (i<10) {i="0" + i;}return i;} window.onload=function(){startTime();} </script> <div id="reloj"></div>  -->
+                         </li>
+
+                        <li class="social-facebook"><a href="#" > <img src="{% static 'img/facebook_32.png' %}" ></a></li>
+                        <li class="social-facebook"><a href="#" > <img src="{% static 'img/twitter_32.png' %}" > </a></li>
+                        <li class="social-facebook"><a href="#" > <img src="{% static 'img/linkedin_32.png' %}" > </a></li>
+
+                    </ul>
+
+                </li>
+
+			</ul>
+</div>
+
+{% endblock %}

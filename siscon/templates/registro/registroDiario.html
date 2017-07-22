@@ -1,0 +1,17 @@
+
+{% block segundocontenido %}
+	{% for registro in registros %}
+		{% if registro.usuario == user %}
+			<tr>
+				<td>{{registro.fecha|date:'d F Y'}}</td>
+				<td>{{registro.ganancia}}</td>
+			    <td>{{registro.gasto}}</td>
+				<td>{{registro.nota}} </td>
+				<td><a href="/modificar-registro/{{registro.id}}" class="btn btn-info btn-sm">Editar</a></td>
+				<td><a href="/eliminar-registro/{{registro.id}}" class="btn btn-danger btn-sm">Eliminar</a></td>
+			</tr>
+		{% endif %}
+	{% endfor %}
+{% endblock %}
+
+

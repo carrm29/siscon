@@ -1,0 +1,401 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}Muestra De Cáculos{% endblock %}
+
+
+<body>
+
+
+{% block bodyini %}
+
+    <section>
+
+	<br>
+    <br>
+    <hr>
+
+	<article class="col-md-6">
+		<ul class="nav nav-tabs nav-justified well">
+
+            <div style="overflow:auto;"><br>
+
+                <a id="pt1"> Resumen de Ventas Distribuidor </a>
+
+                <table>
+                    <tr>
+                        <td id="td_tl"> Total de lineas </td>
+                        <td> {{ num_reg }} </td>
+                    </tr>
+                    <tr>
+                        <td id="td_tl"> Total de dinero en Recargas de PREPAGO</td>
+                        <td> {{ vtotal_prep }} </td>
+                    </tr>
+                    <tr>
+                        <td id="td_tl"> Total de dinero de Recarga de SIM </td>
+                        <td> {{ vtotal_sim }} </td>
+                    </tr>
+                    <tr>
+                        <td id="td_tl"> Total de dinero de Recargas de PORTA </td>
+                        <td> {{ vtotal_porta }} </td>
+                    </tr>
+                    <tr>
+                        <td id="td_tl"> Total de dinero de Recargas de todos los productos </td>
+                        <td> {{ vtotalprod_rec }} </td>
+                    </tr>
+                    <tr>
+                        <td id="td_tl"> Total de Comisión de PREPAGO % {{ vporgen }}</td>
+                        <td> {{ vtotalcom_prep }} </td>
+                    </tr>
+
+                    <tr>
+                        <td id="td_tl">  Total de Comisión de SIM  %  {{ vporsim }}</td>
+                        <td> {{ vtotalcom_sim }} </td>
+                    </tr>
+                    <tr>
+                        <td id="td_tl">  Total de Comisión de PORTA  %  {{ vporporta }}</td>
+                        <td> {{ vtotalcom_porta }} </td>
+                    </tr>
+                    <tr>
+                        <td id="td_tl"> Total de Comisión de todos los productos </td>
+                        <td> {{ vtotalcom }}  </td>
+                    </tr>
+
+                </table>
+
+            </div>
+
+        </ul>
+    </article>
+
+	<article class="col-md-6">
+		<ul class="nav nav-tabs nav-justified well">
+
+            <div style="overflow:auto;"><br>
+
+                 <a id="pt1"> Resumen de Ventas Telefónica </a>
+
+                <table>
+                    <tr>
+                        <td id="td_tl"> Total de lineas </td>
+                        <td> {{ num_regprov }} </td>
+                    </tr>
+                    <tr>
+                        <td id="td_tl"> Total de dinero en Recargas de PREPAGO </td>
+                        <td> {{ vtotal_prep }} </td>
+                    </tr>
+                    <tr>
+                        <td id="td_tl"> Total de dinero de Recarga de SIM </td>
+                        <td> {{ vtotal_sim }} </td>
+                    </tr>
+
+                    <tr>
+                        <td id="td_tl"> Total de dinero de Recargas de PORTA </td>
+                        <td> {{ vtotal_porta }} </td>
+                    </tr>
+
+                    <tr>
+                        <td id="td_tl"> Total de dinero de Recargas de todos los productos </td>
+                        <td> {{ vtotalprod_rec }} </td>
+                    </tr>
+                    <tr>
+                        <td id="td_tl"> Total de Comisión de PREPAGO % {{ vporgen }}</td>
+                        <td> {{ vtotalcom_prep }} </td>
+                    </tr>
+                    <tr>
+                        <td id="td_tl">  Total de Comisión de SIM  %  {{ vporsim }}</td>
+                        <td> {{ vtotalcom_sim }} </td>
+                    </tr>
+                    <tr>
+                        <td id="td_tl">  Total de Comisión de PORTA  %  {{ vporporta }}</td>
+                        <td> {{ vtotalcom_porta }} </td>
+                    </tr>
+                    <tr>
+                        <td id="td_tl"> Total de Comisión de todos los productos </td>
+                        <td> {{ vtotalcom }}  </td>
+                    </tr>
+
+                </table>
+
+            </div>
+
+        </ul>
+    </article>
+
+
+	<article class="col-md-12">
+                <!-- id="t01" class="table table-striped"-->
+                <table class="scroll">
+                <caption id="cap_text_w">Ventas Pagadas</caption>
+
+                <thead>
+                    <tr>
+                      <th>DN</th>
+                      <th>ICC</th>
+                      <th>Fecha Activ.</th>
+                      <th>Producto</th>
+                      <th>Recarga Dist</th>
+                      <th>Comisión Dist</th>
+                      <th>Recarga Tel</th>
+                      <th>Comisión Tel</th>
+                      <th>Diferencia</th>
+                    </tr>
+
+                </thead>
+                 <tbody>
+                  {% for archivoexdetlp in datexcellp %}
+                      <tr>
+                       <td>{{ archivoexdetlp.DN }}</td>
+                       <td>{{ archivoexdetlp.ICC }}</td>
+                       <td>{{ archivoexdetlp.FechaA }}</td>
+                       <td>{{ archivoexdetlp.Producto }}</td>
+                       <td>{{ archivoexdetlp.Recarga }}</td>
+                       <td>{{ archivoexdetlp.Comision }}</td>
+                       <td>{{ archivoexdetlp.RecargaProv }}</td>
+                       <td>{{ archivoexdetlp.ComisionProv }}</td>
+                       <td>{{ archivoexdetlp.Dif }}</td>
+                       </tr>
+                  {% empty %}
+                  <tr><td colspan="4">No hay datos registradas</td></tr>
+                  {% endfor %}
+
+                 </tbody>
+
+                </table>
+
+
+    </article>
+
+	<article class="col-md-12">
+                <!-- id="t01" class="table table-striped"-->
+                <table class="scroll">
+                <caption id="cap_text_w">Ventas NO Pagadas</caption>
+
+                <thead>
+                    <tr>
+                      <th>DN</th>
+                      <th>ICC</th>
+                      <th>Fecha Activ.</th>
+                      <th>Producto</th>
+                      <th>Recarga</th>
+                      <th>Comisión</th>
+                      <th>Archivo</th>
+                  </tr>
+                </thead>
+
+                 <tbody>
+
+                  {% for archivoexdetlnop in datexcellnop %}
+                      <tr>
+                       <td>{{ archivoexdetlnop.DN }}</td>
+                       <td>{{ archivoexdetlnop.ICC }}</td>
+                       <td>{{ archivoexdetlnop.FechaA }}</td>
+                       <td>{{ archivoexdetlnop.Producto }}</td>
+                       <td>{{ archivoexdetlnop.Recarga }}</td>
+                       <td>{{ archivoexdetlnop.Comision }}</td>
+                       <td>{{ archivoexdetlnop.filename }}</td>
+                       </tr>
+                  {% empty %}
+                  <tr><td colspan="4">No hay datos registradas</td></tr>
+                  {% endfor %}
+
+                 </tbody>
+
+                </table>
+
+
+    </article>
+
+
+
+    	<article class="col-md-12">
+	    <ul class="nav nav-tabs nav-justified well">
+
+
+
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+          google.charts.load("current", {packages:["corechart"]});
+          google.charts.setOnLoadCallback(drawChart);
+          function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+              ['Producto', 'Ventas'],
+              ['PREPAGO  {{ vtotal_prep}}', {{ vtotal_prep }}],
+              ['SIM  {{ vtotal_sim }}', {{ vtotal_sim }}],
+              ['PORTA  {{ vtotal_porta }}', {{ vtotal_porta }}]
+            ]);
+
+            var options = {
+              title: 'Ventas Por Producto',
+              is3D: true,
+              chartArea:{height:'90%'},
+                enableInteractivity:true,
+                legend:{alignment: 'top', maxLines: 2, textStyle:{fontSize: 10}}
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+            chart.draw(data, options);
+          }
+        </script>
+
+            <center><div  id="piechart_3d" style="width: 700px; height: 350px;"></div></center>
+
+
+            </ul>
+
+            </article>
+
+
+
+	<article class="col-md-12">
+		<ul class="nav nav-tabs nav-justified well">
+
+
+
+        <script type="text/javascript">
+          google.charts.load("current", {packages:["corechart"]});
+          google.charts.setOnLoadCallback(drawChart2);
+          function drawChart2() {
+            var data2 = google.visualization.arrayToDataTable([
+              ['Producto', 'Ventas'],
+              ['PREPAGO {{ vtotalcom_prep }}', {{ vtotalcom_prep }}],
+              ['SIM {{ vtotalcom_sim }}', {{ vtotalcom_sim }}],
+              ['PORTA {{ vtotalcom_porta }}', {{ vtotalcom_porta }}]
+            ]);
+
+            var options2 = {
+              title: 'Comisiones Por Producto',
+              is3D: true,
+              chartArea:{height:'90%'},
+              enableInteractivity:true,
+              legend:{alignment: 'top', maxLines: 2, textStyle:{fontSize: 10}}
+            };
+
+            var chart2 = new google.visualization.PieChart(document.getElementById('piechart_3d2'));
+            chart2.draw(data2, options2);
+          }
+        </script>
+
+           <center><div id="piechart_3d2" style="width: 700px; height: 350px;"></div></center>
+
+
+        </ul>
+
+    </article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<article class="col-md-12">
+
+
+
+
+                <!-- id="t01" class="table table-striped"-->
+                <table class="scroll">
+                <caption id="cap_text_w">Ventas Distribuidor Encontradas</caption>
+
+                 <thead>
+                  <tr>
+                      <th>DN</th>
+                      <th>ICC</th>
+                      <th>Fecha Activ.</th>
+                      <th>Producto</th>
+                      <th>Recarga</th>
+                      <th>Estatus</th>
+                  </tr>
+                 </thead>
+
+                 <tbody>
+                  {% for archivoexdet in datexcel %}
+                      <tr>
+                       <td>{{ archivoexdet.DN }}</td>
+                       <td>{{ archivoexdet.ICC }}</td>
+                       <td>{{ archivoexdet.FechaA }}</td>
+                       <td>{{ archivoexdet.Producto }}</td>
+                       <td>{{ archivoexdet.Recarga }}</td>
+                       <td>{{ archivoexdet.Estatus }}</td>
+                      </tr>
+                  {% empty %}
+                  <tr><td colspan="4">No hay datos registradas</td></tr>
+                  {% endfor %}
+                 </tbody>
+                </table>
+
+
+    </article>
+
+
+
+
+	<article class="col-md-12">
+
+
+                <!-- id="t01" class="table table-striped"-->
+                <table class="scroll">
+                <caption id="cap_text_w">Ventas Telefónica Encontradas</caption>
+
+                 <thead>
+                  <tr>
+                      <th>DN</th>
+                      <th>ICC</th>
+                      <th>Fecha Activ.</th>
+                      <th>Producto</th>
+                      <th>Recarga</th>
+                      <th>Comision</th>
+                      <th>Estatus</th>
+                  </tr>
+                 </thead>
+
+                 <tbody>
+                  {% for  archivoexdetprov in datexcelprov %}
+                      <tr>
+                       <td>{{ archivoexdetprov.DN }}</td>
+                       <td>{{ archivoexdetprov.ICC }}</td>
+                       <td>{{ archivoexdetprov.FechaA }}</td>
+                       <td>{{ archivoexdetprov.Producto }}</td>
+                       <td>{{ archivoexdetprov.Recarga }}</td>
+                       <td>{{ archivoexdetprov.Comision }}</td>
+                       <td>{{ archivoexdetprov.Estatus }}</td>
+                      </tr>
+                  {% empty %}
+                  <tr><td colspan="4">No hay datos registradas</td></tr>
+                  {% endfor %}
+                 </tbody>
+                </table>
+
+
+                <a class='bflotante' href="javascript:history.back()"><img src="{% static 'img/back_arrow_l.ico' %}"></a>
+
+
+    </article>
+
+
+
+
+
+
+
+    </section>
+
+
+
+{% endblock %}
+
+
+{% block contenido %}
+
+
+{% endblock %}
+
+</body>

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+
+{% block header %}
+
+{% endblock %}
+
+{% block contenido %}
+    <!--No permite desplegar el encabezado
+	<style>
+		.helptext{ display: none;}
+		header{display: none; }
+	</style>
+	-->
+
+		<div class="container">
+				<h1 style="color: #fff;" align="center">Solicitud De Cambio De Clave</h1>
+		</div>
+
+
+
+	<article class="col-md-3"><div id="cajaArriba" style="display: none;"></div>	</article>
+	<article class="col-md-6">
+		<ul class="nav nav-tabs nav-justified well">
+
+				<form class="form-horizontal"  method="post" action="">{% csrf_token %}
+					<br>
+					{{form.as_p}}
+					<button type="submit" class="btn btn-primary">Enviar</button>
+					<a href="/" class="btn btn-danger" type="submit">Cancelar</a>
+				</form>
+
+		</ul>
+		<hr></hr>
+	</article>
+
+{% endblock %}
+
+
+{% block contenidomedio %}
+{% endblock %}
+
+{% block segundocontenido %}
+{% endblock %}
+
+{% block script %}
+{% endblock %}
+
+
+<!-- { block footer %} { endblock %} -->
+
+<!-- { block script %} { endblock %} -->
+

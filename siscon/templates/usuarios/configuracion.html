@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block titulo %}Perfil{% endblock  %}
+
+{% block header %}
+	<!-- <h2 id="perfil">MI PERFIL</h2> -->
+	<div id="imagen_perfil">
+		<img id="img-perfil" src="{{STATIC_URL}}img/perfil.jpg">
+	</div>
+{% endblock  %}
+
+{% block perfil %}
+	<article class="col-md-1">
+		<div id="cajaArriba" style="display: none;"></div>	
+	</article>
+	<article id="perfil" class="col-md-10">
+		<ul class="nav nav-tabs nav-justified well">
+  			<li role="presentation" class="active"><a href="/perfil">Perfil</a>
+  				{{user.perfiles.usuario }}
+  				{{user.perfiles.id}}
+  				{{user.username}}
+  				{{user.id}}
+				{% if user.perfiles.usuario %}
+					<h3>Nombre de Usuario: </h3>
+					<p>{{user.username|capfirst}}</p>
+					<h3>Nombre: </h3>
+					<p>{{user.perfiles.nombre|capfirst}}</p>
+					<h3>Apellido: </h3>
+					<p>{{user.perfiles.apellido|capfirst}}</p>
+					<h3>Telefono: </h3>
+					<p>{{user.perfiles.telefono}}</p>
+					<h3>Correo:</h3>
+					<p>{{user.perfiles.correo}}</p>	
+					{% else %}
+						<h3>Nombre de Usuario: </h3>
+						<p>{{user.username|capfirst}}</p>
+						<h3>Email: </h3>
+						<p>{{user.email}}</p>
+						<h3>Nombre: </h3>
+						<p>{{user.first_name}}</p><p>{{user.last_name}}</p>
+				{% endif %}
+  			</li>
+  				{% if user.perfiles.usuario  %}
+  					<li role="presentation"><a href="actualizar-perfil/{{user.perfiles.id}}/">Editar Perfil</a></li>
+  					<li role="presentation"><a href="cambiar-clave/">Cambiar Contraseña</a></li>
+  				{% else %}
+  					<li role="presentation"><a href="#" class="btn disabled">Editar Perfil</a></li>
+  					<li role="presentation"><a href="#" class="btn disabled">Cambiar Contraseña</a></li>
+  				{% endif %}  				
+		</ul>
+		<hr></hr>
+	</article>
+{% endblock %}
+
+{% block etiquetaPerfil %}
+	class="active"
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block titulo %}Nuevo Usuario{% endblock  %}
+
+{% block header %}
+	<section id="inicio">
+		<div class="container">
+				<h1>Ganancias y Gastos</h1>
+		</div>
+	</section>
+{% endblock %}
+
+{% block cabezera %}
+	<h2 id="titulos">CREAR NUEVO USUARIO</h2>
+{% endblock  %}
+
+{% block contenido %}
+
+	<style>
+		.helptext{ display: none;}
+		header{display: none; }
+	</style>
+
+	<hr></hr>
+	<article class="col-md-3"><div id="cajaArriba" style="display: none;"></div>	</article>
+	<article class="col-md-6">
+		<ul class="nav nav-tabs nav-justified well">
+				<form class="form-horizontal" id="formulario" method="post" action="">{% csrf_token %}
+					<br>
+					{{form.as_p}}
+					<button type="submit" class="btn btn-primary">Registrar</button>
+					<a href="/" class="btn btn-danger" type="submit">Cancelar</a>
+				</form>
+		</ul>
+		<hr> </hr>
+	</article>
+{% endblock %}
+
+{% block script %}
+	<script>
+		$(document).ready(function(){
+			console.log( "ready!" );
+			$('#id_username').addClass('form-control');
+			$('#id_password1').addClass('form-control');
+			$('#id_password2').addClass('form-control');
+			/*$('#id_nombre').addClass('form-control');
+			$('#id_apellido').addClass('form-control');
+			$('#id_telefono').addClass('form-control');*/
+		});
+	</script>
+{% endblock %}

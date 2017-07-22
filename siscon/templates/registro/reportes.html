@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block titulo %}Reportes{% endblock  %}
+
+{% block header %}
+	<!-- <h2 id="perfil">MI PERFIL</h2> -->
+	<div id="imagen_perfil">
+		<img id="img-perfil" src="{{STATIC_URL}}img/reporte.jpg">
+	</div>
+{% endblock  %}
+
+{% block contenido %}
+	<article class="col-lg-12 col-sm-12 form-inline" id="reporte">
+		<div class="panel panel-default">
+			<div class="panel-heading"><h3>Calcular Reporte</h3></div>
+			<div class="panel-body">
+		    	<label for="">Fecha Inicial</label>
+		      	<input type="date" class="form-control" id="fecha1">
+		      	<label for="">Fecha Final</label>
+		      	<input type="date" class="form-control" id="fecha2">
+	        	<button class="btn btn-primary" type="button" id="buscandoReporte">Calcular</button>
+			</div>
+		</div>
+	</article><!-- /.col-lg-6 -->
+{% endblock %}
+
+{% block contenidomedio %}
+<div id="cajaArriba" style="display: none;"></div>	
+	<article class="col-md-4 col-sm-4">
+		<div class="panel panel-info">
+			<div class="panel-heading"><h3>Total Actual</h3></div>
+			<div class="panel-body">
+				<h2 id="totalActual"></h2>
+			</div>
+		</div>
+	</article>
+	<article class="col-md-4 col-sm-4">
+		<div class="panel panel-success">
+			<div class="panel-heading"><h3>Ganancias Acumuladas</h3></div>
+			<div class="panel-body">
+				<h2 id="valorNumerico">0</h2>
+			</div>
+		</div>
+	</article>
+	<article class="col-md-4 col-sm-4">
+		<div class="panel panel-danger">
+			<div class="panel-heading"><h3>Gastos Acumulados</h3></div>
+			<div class="panel-body">
+				<h2 id="valorNumerico2">0</h2>
+			</div>
+		</div>
+	</article>
+{% endblock %}
+
+{% block script %}
+	<script>
+	/*Formatear valores numericos para que se vean como pesos*/
+  var formatNumber = {
+       separador: ".", // separador para los miles
+       sepDecimal: ',', // separador para los decimales
+         formatear:function (num){
+         num +='';
+         var splitStr = num.split('.');
+         var splitLeft = splitStr[0];
+         
+         var regx = /(\d+)(\d{3})/;
+         while (regx.test(splitLeft)) {
+         splitLeft = splitLeft.replace(regx, '$1' + this.separador + '$2');
+         }
+         return this.simbol + splitLeft;
+         },
+       new:function(num, simbol){
+       this.simbol = simbol ||'';
+       return this.formatear(num);
+       }
+    }
+	/*$(document).on( "keyup", "#buscar", function() {*/
+		$("#reporte").on( "click","#buscandoReporte",function() {
+			var fecha1 = $('#fecha1').val();
+			var fecha2 = $('#fecha2').val();
+			//console.log(data);
+			$.ajax({
+				data: {'fecha1': fecha1, 'fecha2': fecha2},
+				url: '/ver_reportes/',
+				type: 'get',
+				success: function(data){
+					var html = "";
+                  	var datos = JSON.parse(data);
+                  	console.log(datos);
+                  	var gananciaAcumulada = 0;
+                  	var gastoAcumulado = 0;
+                  	for (var i = 0; i < datos.length; i++) {
+                     /* console.log(datos[i].pk);*/
+                     //console.log(datos[i].fields.fecha);
+                    	gananciaAcumulada = gananciaAcumulada + datos[i].fields.ganancia;
+                    	gastoAcumulado = gastoAcumulado + datos[i].fields.gasto;
+                       
+                     };
+					$('#valorNumerico').html(formatNumber.new(gananciaAcumulada, "$"));
+                                
+                  	$('#valorNumerico2').html(formatNumber.new(gastoAcumulado, "$"));
+                  	var Total = gananciaAcumulada - gastoAcumulado;
+                  	$('#totalActual').html(formatNumber.new(Total, "$"));
+				}
+			});
+		});
+	</script>
+{% endblock %}

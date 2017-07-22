@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html lang="es">
+
+{% include 'header.html' %}
+
+<body data-spy="scroll" style="background-image:url({% static 'img/bg-def.png' %});">
+
+<section id="intro" class="intro">
+
+    {% include 'headernav.html' %}
+
+    <section class="mainini">
+        {% block bodyini %}{% endblock %}
+    </section>
+
+
+    <div class="container">
+
+        {% block bodycon1 %}{% endblock %}
+        {% block perfil %}{% endblock %}
+
+        <section class="main row">
+
+            {% block bodycon2 %} {% endblock %}
+            {% block cabezera %} {% endblock %}
+
+            {% block contenido %} {% endblock %}
+        </section>
+        <section class="espacio row">
+            {% block contenidomedio %} {% endblock %}
+        </section>
+        <section class="espacio row">
+            {% block segundocontenido %} {% endblock %}
+        </section>
+    </div>
+
+</section>
+
+</body>
+
+{% include 'footer.html' %}
+
+</html>

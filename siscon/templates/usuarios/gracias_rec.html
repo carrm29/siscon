@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block titulo %}Activar Cuenta{% endblock  %}
+
+{% block header %}
+	<section id="inicio">
+		<div class="container">
+				<h1>Concresys</h1>
+		</div>
+	</section>
+{% endblock %}
+
+{% block cabezera %}
+	<style>
+		.helptext{ display: none;}
+		header{display: none; }
+	</style>
+	<h2 id="titulos">Solicitud De Clave</h2>
+{% endblock  %}
+
+{% block contenido %}
+<aticle class="col-md-12">
+	<div id="cajaArriba" style="display: none;"></div>	
+	<div class="table-responsive panel panel-primary">
+		<div class="panel-heading"><h4>Clave Enviada</h4></div>
+		<div class="panel-body"> 
+			<h1>Revisa tu correo gracias; la clave ha sido enviada</h1>
+			<a class="btn btn-primary" href="/">Volver</a>
+		</div>
+	</div>
+</aticle>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block titulo %}Actualizar Perfil{% endblock  %}
+
+{% block cabezera %}
+	<h2 id="titulos">ACTUALIZAR MI PERFIL</h2>
+{% endblock  %}
+
+{% block contenido %}
+<style>
+	#id_usuario{display: none;}
+	label[for=id_usuario]{display: none;} 
+</style>
+	<hr></hr>
+	<article class="col-md-1"></article>
+	<article class="col-md-10">
+		<ul class="nav nav-tabs nav-justified well">
+  			<li role="presentation"> <a href="/perfil">Perfil</a></li>
+				{% if user.perfiles.usuario %}
+					<form class="form-horizontal" id="formulario" method="post" action="">{% csrf_token %}
+						{{formulario.as_p}}
+						<br>
+						<button type="submit" class="btn btn-success">Actualizar</button>
+						<a href="/perfil" class="btn btn-warning" type="submit">Cancelar</a>
+					</form>
+				{% endif %}
+  			</li>
+		</ul>
+		<hr></hr>
+	</article>
+{% endblock %}
+
+{% block script %}
+	<script>
+		$(document).ready(function(){
+			console.log( "ready!" );
+			/*$('#id_nombre').addClass('form-control');
+			$('#id_apellido').addClass('form-control');
+			$('#id_telefono').addClass('form-control');
+			$('#id_correo').addClass('form-control');
+			$('#id_usuario > option[value="{{user.id}}"]').attr('selected', 'selected');*/
+		});
+	</script>
+{% endblock %}
+
+{% block etiquetaPerfil %}
+	class="active"
+{% endblock %}
